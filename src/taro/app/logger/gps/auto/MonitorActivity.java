@@ -12,6 +12,15 @@ import android.view.Menu;
  */
 public class MonitorActivity extends Activity {
 
+	private static final String TAG = "MonitorActivity";
+
+	private LogInfo mLogInfo;
+
+	public MonitorActivity() {
+		super();
+
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,11 +37,12 @@ public class MonitorActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 
-		/* for debug */
+		mLogInfo = new LogInfo(this);
+
 		Intent intent = new Intent(MonitorActivity.this, LogIntentService.class);
-		intent.putExtra("filename", "taro.app.logger.gps.auto.txt");
-		intent.putExtra("contents", "test");
-		intent.putExtra("append", false);
+		intent.putExtra(mLogInfo.getKeyFilename(), new CurrentDateFileName().getFileName());
+		intent.putExtra(mLogInfo.getKeyContents(), "test");
+		intent.putExtra(mLogInfo.getKeyAppend(), true);
 		startService(intent);
 	}
 

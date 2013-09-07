@@ -4,6 +4,9 @@
     <string name="app_name">AutoGPSLogger</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="log_key_filename">taro.app.logger.gps.auto.txt</string>
-
+    <string name="log_key_filename">filename</string>
+    <string name="log_key_contents">contents</string>
+    <string name="log_key_append">append</string>
+    <string name="log_value_filename">taro.app.logger.gps.auto.txt</string>
+        
 </resources>

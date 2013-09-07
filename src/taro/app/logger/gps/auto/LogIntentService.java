@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -27,6 +28,8 @@ import android.util.Log;
 public class LogIntentService extends IntentService {
 	
 	private static final String TAG = "LogIntentService";
+	
+	private LogInfo mLogInfo;
 
 	public LogIntentService(String name) {
 		super(name);
@@ -40,6 +43,18 @@ public class LogIntentService extends IntentService {
 		super(TAG);
 	}
 
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		mLogInfo = new LogInfo(this);
+	}
+
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+	}
+
 	/**
 	 * startService() によって実行されるタスク。
 	 */
@@ -48,9 +63,9 @@ public class LogIntentService extends IntentService {
 		
 		Bundle bundle = intent.getExtras();
 		
-		String filename = bundle.getString("filename");
-		String contents = bundle.getString("contents");
-		boolean append = bundle.getBoolean("append");
+		String filename = bundle.getString(mLogInfo.getKeyFilename());
+		String contents = bundle.getString(mLogInfo.getKeyContents());
+		boolean append = bundle.getBoolean(mLogInfo.getKeyAppend());
 
 		String filepath = Environment.getExternalStorageDirectory() + "/" + filename;
 		try {
@@ -66,4 +81,5 @@ public class LogIntentService extends IntentService {
 		
 	}
 
+	
 }
