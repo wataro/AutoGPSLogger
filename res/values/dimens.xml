@@ -3,5 +3,10 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <item name="location_interval_millis" type="integer">5000</item>
+    <dimen name="text_size">24dp</dimen>
+    <item name="view_interval_millis" type="integer">5000</item>
+    <item name="runner_interval_millis" type="integer">5000</item>
+    <item name="runner_history_size" type="integer">3</item>
 
 </resources>

@@ -22,7 +22,7 @@ public class LogInfo {
 	private final String mKeyAppend;
 	
 	/** ファイル名 */
-	private final String mValueFilename;
+	private final String mPrefix;
 
 	/**
 	 * コンストラクタ
@@ -33,7 +33,7 @@ public class LogInfo {
 		mKeyFilename = resources.getString(R.string.log_key_filename);
 		mKeyContents = resources.getString(R.string.log_key_contents);
 		mKeyAppend = resources.getString(R.string.log_key_append);
-		mValueFilename = resources.getString(R.string.log_value_filename);
+		mPrefix = resources.getString(R.string.log_value_prefix);
 	}
 
 	public String getKeyFilename() {
@@ -48,7 +48,7 @@ public class LogInfo {
 		return mKeyAppend;
 	}
 	
-	public String getValueFilename() {
-		return mValueFilename;
+	public String getValuePrefix() {
+		return mPrefix;
 	}
 }

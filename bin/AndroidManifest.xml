@@ -8,6 +8,9 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="18" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
 
     <application
         android:allowBackup="true"
@@ -23,7 +26,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name="LogIntentService"></service>
-    </application>
+        <service android:name="taro.service.LogIntentService"></service>
+        <service android:name="LocationService"></service>
+        <service android:name="taro.service.AutoGPSLogService"></service>
+        <service android:name="taro.service.BrightenByHandService"></service>
+        </application>
 
 </manifest>

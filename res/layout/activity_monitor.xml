@@ -9,8 +9,114 @@
     tools:context=".MonitorActivity" >
 
     <TextView
+        android:id="@+id/longitude_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentTop="true"
+        android:textSize="@dimen/text_size"
+        android:text="経度: " />
+
+    <TextView
+        android:id="@+id/longitude_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/longitude_label"
+        android:textSize="@dimen/text_size"
+        android:text="XXX" />
+    
+    <TextView
+        android:id="@+id/latitude_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/longitude_label"
+        android:textSize="@dimen/text_size"
+        android:text="緯度: " />
+
+    <TextView
+        android:id="@+id/latitude_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/latitude_label"
+        android:layout_toRightOf="@id/latitude_label"
+        android:textSize="@dimen/text_size"
+        android:text="YYY" />
+    
+    <TextView
+        android:id="@+id/altitude_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/latitude_label"
+        android:textSize="@dimen/text_size"
+        android:text="高度: " />
+
+    <TextView
+        android:id="@+id/altitude_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/altitude_label"
+        android:layout_toRightOf="@id/altitude_label"
+        android:textSize="@dimen/text_size"
+        android:text="ZZZ" />
+
+    <TextView
+        android:id="@+id/speed_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/altitude_label"
+        android:textSize="@dimen/text_size"
+        android:text="速度: " />
+
+    <TextView
+        android:id="@+id/speed_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/speed_label"
+        android:layout_toRightOf="@id/speed_label"
+        android:textSize="@dimen/text_size"
+        android:text="WWW" />
+    
+    <TextView
+        android:id="@+id/from_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/speed_label"
+        android:textSize="@dimen/text_size"
+        android:text="記録開始: " />
+
+    <TextView
+        android:id="@+id/from_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/from_label"
+        android:layout_toRightOf="@id/from_label"
+        android:textSize="@dimen/text_size"
+        android:text="@string/date_format" />
+    
+    <TextView
+        android:id="@+id/to_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/from_label"
+        android:textSize="@dimen/text_size"
+        android:text="記録終了: " />
+
+    <TextView
+        android:id="@+id/to_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/to_label"
+        android:layout_toRightOf="@id/to_label"
+        android:textSize="@dimen/text_size"
+        android:text="@string/date_format" />
+
+    <Switch
+        android:id="@+id/app_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:checked="true"
+        android:text="アプリの電源" />
 
 </RelativeLayout>

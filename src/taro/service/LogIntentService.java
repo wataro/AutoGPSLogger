@@ -1,4 +1,4 @@
-package taro.app.logger.gps.auto;
+package taro.service;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+
+import taro.app.logger.gps.auto.LogInfo;
 
 import android.app.IntentService;
 import android.content.Intent;
