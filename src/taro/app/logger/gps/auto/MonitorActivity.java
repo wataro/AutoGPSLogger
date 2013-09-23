@@ -38,8 +38,6 @@ public class MonitorActivity extends Activity {
 
 	private static final String TAG = "MonitorActivity";
 	
-	private TextView mAltitudeView;
-
 	/** Defines callbacks for service binding, passed to bindService() */
     private ServiceConnection mConnection = new ServiceConnection() {
 
@@ -62,11 +60,8 @@ public class MonitorActivity extends Activity {
 	private Handler mHandler = new Handler();
 	
 	private int mIntervalMillis;
-	private TextView mLatitudeView;
 	
 	private LogInfo mLogInfo;
-
-    private TextView mLongitudeView;
 
 	private AutoGPSLogService mService = null;
 
@@ -77,6 +72,9 @@ public class MonitorActivity extends Activity {
 	private Location mLocation = null;
 	
 	private double mDistance = 0;
+	
+	private String mDateFormat;
+	
 	
 	public MonitorActivity() {
 		super();
@@ -101,12 +99,11 @@ public class MonitorActivity extends Activity {
 			}			
 		});
 
-		mLongitudeView = (TextView) findViewById(R.id.longitude_value);
-		mLatitudeView = (TextView) findViewById(R.id.latitude_value);
-		mAltitudeView = (TextView) findViewById(R.id.altitude_value);
 		mFromTextView = (TextView) findViewById(R.id.from_value); 
-		mToTextView = (TextView) findViewById(R.id.to_value);
+		mToTextView = (TextView) findViewById(R.id.distance_value);
 		mSpeedView = (TextView)  findViewById(R.id.speed_value);
+		
+		mDateFormat = getResources().getString(R.string.date_format);
 
 		Intent intent = new Intent(MonitorActivity.this, AutoGPSLogService.class);
 		bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
@@ -148,6 +145,10 @@ public class MonitorActivity extends Activity {
 
 		mHandler.post(new Runnable() {
 
+			private final SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat(mDateFormat, Locale.JAPAN);
+			private final NumberFormat mDistanceFormat = NumberFormat.getInstance();
+			private final NumberFormat mSpeedFormat = NumberFormat.getInstance();
+
 			@Override
 			public void run() {
 				do{
@@ -157,28 +158,21 @@ public class MonitorActivity extends Activity {
 					
 					if (null == location) { break; }
 
-					final NumberFormat df = NumberFormat.getInstance();
-					df.setMaximumFractionDigits(7);
-
-					if (null == mLongitudeView) { break; }
-					mLongitudeView.setText(df.format(location.getLongitude()));
-					
-					if (null == mLatitudeView) { break; }
-					mLatitudeView.setText(df.format(location.getLatitude()));
-					
-					if (null == mAltitudeView) { break; }
-					mAltitudeView.setText(df.format(location.getAltitude()));
-					
 					if (null == mFromTextView) { break; }
 					Date date = new Date(location.getTime());
-					SimpleDateFormat sdf = new SimpleDateFormat("HH-mm-ss", Locale.JAPAN);
-					mFromTextView.setText(sdf.format(date));
+					mFromTextView.setText(mSimpleDateFormat.format(date));
 					
 					if (null == mToTextView) { break; }
-					mToTextView.setText(df.format(mService.getDistance()));
+					mDistanceFormat.setMaximumFractionDigits(3);
+					mDistanceFormat.setMinimumFractionDigits(3);
+					mDistanceFormat.setMinimumIntegerDigits(3);
+					mToTextView.setText(mDistanceFormat.format(mService.getDistance()));
 					
 					if (null == mSpeedView) { break; }
-					mSpeedView.setText(df.format(location.getSpeed()));
+					mSpeedFormat.setMaximumFractionDigits(1);
+					mSpeedFormat.setMinimumFractionDigits(1);
+					mSpeedFormat.setMinimumIntegerDigits(2);
+					mSpeedView.setText(mSpeedFormat.format(location.getSpeed()));
 
 				}while(false);
 				// TODO Auto-generated method stub

@@ -8,6 +8,6 @@
     <string name="log_key_contents">contents</string>
     <string name="log_key_append">append</string>
     <string name="log_value_prefix">taro.app.logger.gps.auto_</string>
-    <string name="date_format">HH-mm-ss</string>
+    <string name="date_format">HH:mm:ss</string>
         
 </resources>

@@ -4,7 +4,9 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <item name="location_interval_millis" type="integer">5000</item>
-    <dimen name="text_size">24dp</dimen>
+    <dimen name="text_size">48dp</dimen>
+    <dimen name="speed_value_text_size">96dp</dimen>
+    <dimen name="date_value_text_size">72dp</dimen>
     <item name="view_interval_millis" type="integer">5000</item>
     <item name="runner_interval_millis" type="integer">5000</item>
     <item name="runner_history_size" type="integer">3</item>
