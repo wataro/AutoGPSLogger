@@ -28,6 +28,7 @@ LocationListener {
 
 	private static final String TAG = "GPSListener";
 	private final Context mContext;
+	private final int mIntervalMillis;
 	private final LocationRequest mLocationRequest;
 	private final LocationClient mLocationClient;
 	private Location mLocation = null;
@@ -39,6 +40,9 @@ LocationListener {
 	 */
 	public GPSListener(Context context) {
 		mContext = context;
+    	Resources resouces = mContext.getResources();
+    	mIntervalMillis = resouces.getInteger(R.integer.location_interval_millis);
+
 		if (this.checkGooglePlayService()) {
 			mLocationRequest = this.createRequest();
 			mLocationClient = new LocationClient(mContext, this, this);
@@ -108,12 +112,9 @@ LocationListener {
 	}
 
 	private LocationRequest createRequest() {
-    	Resources resouces = mContext.getResources();
-    	final int intervalMillis = resouces.getInteger(R.integer.location_interval_millis);
-
     	return LocationRequest.create()
 			.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY) // use GPS
-			.setFastestInterval(intervalMillis) // update interval
-			.setInterval(intervalMillis);
+			.setFastestInterval(mIntervalMillis) // update interval
+			.setInterval(mIntervalMillis);
 	}
 }

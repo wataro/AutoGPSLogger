@@ -109,11 +109,8 @@ public class AutoGPSLogRunner implements Runnable {
 		}else{
 			if (0 == countHasSpeed) {
 				mIsLogging = false;
-				mDistance = 0;
-				mSpeed = 0;
-			}else{
-				mDistance += previous.distanceTo(mLocations[mCounter]);
 			}
+			mDistance += previous.distanceTo(mLocations[mCounter]);
 		}
 		
 		if (mIsLogging) {
