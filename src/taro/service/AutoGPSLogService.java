@@ -79,8 +79,4 @@ public class AutoGPSLogService extends Service {
 	public double getDistance() {
 		return mRunner.getDistance();
 	}
-	
-	public double getSpeed() {
-		return mRunner.getSpeed();
-	}
 }
