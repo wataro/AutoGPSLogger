@@ -73,7 +73,7 @@ public class AutoGPSLogService extends Service {
 	}
 	
 	public Location getLocation() {
-		return mGPSListener.getLocation();
+		return mRunner.getLocation();
 	}
 
 	public double getDistance() {
