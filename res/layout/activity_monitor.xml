@@ -18,22 +18,37 @@
         android:checked="true"
         android:text="アプリの電源" />
 
+    <AnalogClock
+        android:id="@+id/analog_clock"
+        android:layout_width="@dimen/analog_clock_size"
+        android:layout_height="@dimen/analog_clock_size"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
+
     <TextView
-        android:id="@+id/distance_label"
+        android:id="@+id/speed_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/app_switch"
+        android:layout_alignTop="@id/analog_clock"
+        android:text="SS.s"
+        android:textSize="@dimen/speed_value_text_size" />
+
+    <TextView
+        android:id="@+id/distance_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/app_switch"
-        android:layout_alignParentRight="true"
-        android:text="km"
-        android:textSize="@dimen/text_size"
-        android:typeface="monospace" />
+        android:layout_alignLeft="@id/speed_value"
+        android:text="DD.ddd"
+        android:textSize="@dimen/distance_value_text_size" />
 
     <TextView
-        android:id="@+id/from_value"
+        android:id="@+id/clock_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
+        android:layout_below="@id/analog_clock"
         android:text="@string/date_format"
         android:textSize="@dimen/date_value_text_size" />
 
@@ -41,30 +56,21 @@
         android:id="@+id/speed_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/speed_value"
-        android:layout_alignBottom="@+id/speed_value"
-        android:layout_toRightOf="@+id/speed_value"
+        android:layout_alignBaseline="@id/speed_value"
+        android:layout_alignBottom="@id/speed_value"
+        android:layout_toRightOf="@id/speed_value"
         android:text="km/s"
         android:textSize="@dimen/text_size"
         android:typeface="monospace" />
 
     <TextView
-        android:id="@+id/distance_value"
+        android:id="@+id/distance_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/distance_label"
-        android:layout_alignBottom="@+id/distance_label"
-        android:layout_toLeftOf="@+id/distance_label"
-        android:text="DD.ddd"
-        android:textSize="@dimen/text_size" />
-
-    <TextView
-        android:id="@+id/speed_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/app_switch"
-        android:layout_below="@+id/from_value"
-        android:text="SS.s"
-        android:textSize="@dimen/speed_value_text_size" />
+        android:layout_alignBottom="@id/distance_value"
+        android:layout_toRightOf="@id/distance_value"
+        android:text="km"
+        android:textSize="@dimen/text_size"
+        android:typeface="monospace" />
 
 </RelativeLayout>

@@ -28,6 +28,7 @@ import android.content.ServiceConnection;
 import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AnalogClock;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
@@ -40,8 +41,6 @@ import android.widget.TextView;
  * 
  */
 public class MonitorActivity extends Activity {
-
-    private static final String TAG = "MonitorActivity";
 
     /** Defines callbacks for service binding, passed to bindService() */
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -63,7 +62,7 @@ public class MonitorActivity extends Activity {
         }
     };
 
-    private TextView mFromTextView = null;
+    private TextView mClockTextView = null;
 
     private Handler mHandler = new Handler();
 
@@ -73,13 +72,9 @@ public class MonitorActivity extends Activity {
 
     private AutoGPSLogService mService = null;
 
-    private TextView mToTextView = null;
+    private TextView mDistanceTextView = null;
 
     private TextView mSpeedView = null;
-
-    private Location mLocation = null;
-
-    private double mDistance = 0;
 
     private String mDateFormat;
 
@@ -112,8 +107,8 @@ public class MonitorActivity extends Activity {
             }
         });
 
-        mFromTextView = (TextView) findViewById(R.id.from_value);
-        mToTextView = (TextView) findViewById(R.id.distance_value);
+        mClockTextView = (TextView) findViewById(R.id.clock_value);
+        mDistanceTextView = (TextView) findViewById(R.id.distance_value);
         mSpeedView = (TextView) findViewById(R.id.speed_value);
 
         mDateFormat = getResources().getString(R.string.date_format);
@@ -194,20 +189,20 @@ public class MonitorActivity extends Activity {
                         break;
                     }
 
-                    if (null == mFromTextView) {
+                    if (null == mClockTextView) {
                         break;
                     }
                     Date date = new Date(location.getTime());
-                    mFromTextView.setText(mSimpleDateFormat.format(date));
+                    mClockTextView.setText(mSimpleDateFormat.format(date));
 
-                    if (null == mToTextView) {
+                    if (null == mDistanceTextView) {
                         break;
                     }
                     mDistanceFormat.setMaximumFractionDigits(3);
                     mDistanceFormat.setMinimumFractionDigits(3);
                     mDistanceFormat.setMinimumIntegerDigits(3);
-                    mToTextView.setText(mDistanceFormat.format(mService
-                            .getDistance()));
+                    mDistanceTextView.setText(mDistanceFormat.format(mService
+                            .getDistance() / 1000)); // [km]
 
                     if (null == mSpeedView) {
                         break;
@@ -215,7 +210,7 @@ public class MonitorActivity extends Activity {
                     mSpeedFormat.setMaximumFractionDigits(1);
                     mSpeedFormat.setMinimumFractionDigits(1);
                     mSpeedFormat.setMinimumIntegerDigits(2);
-                    mSpeedView.setText(mSpeedFormat.format(location.getSpeed()));
+                    mSpeedView.setText(mSpeedFormat.format(3.6 * location.getSpeed()));  // [km/h]
 
                 } while (false);
                 // TODO Auto-generated method stub
