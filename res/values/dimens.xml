@@ -9,6 +9,7 @@
     <dimen name="distance_value_text_size">72dp</dimen>
     <dimen name="date_value_text_size">32dp</dimen>
     <dimen name="analog_clock_size">108dp</dimen>
+    <integer name="speed_bar_max">40</integer>
     <item name="view_interval_millis" type="integer">5000</item>
     <item name="runner_interval_millis" type="integer">5000</item>
     <item name="runner_history_size" type="integer">3</item>

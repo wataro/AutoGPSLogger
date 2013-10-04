@@ -187,25 +187,27 @@ containing a value of this type.
         public static final int ic_launcher=0x7f020018;
     }
     public static final class id {
-        public static final int action_settings=0x7f05000c;
-        public static final int analog_clock=0x7f050006;
+        public static final int action_settings=0x7f05000d;
+        public static final int analog_clock=0x7f050007;
         public static final int app_switch=0x7f050005;
-        public static final int clock_value=0x7f050009;
-        public static final int distance_label=0x7f05000b;
-        public static final int distance_value=0x7f050008;
+        public static final int clock_value=0x7f05000a;
+        public static final int distance_label=0x7f05000c;
+        public static final int distance_value=0x7f050009;
         public static final int hybrid=0x7f050004;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int satellite=0x7f050002;
-        public static final int speed_label=0x7f05000a;
-        public static final int speed_value=0x7f050007;
+        public static final int speed_bar=0x7f050006;
+        public static final int speed_label=0x7f05000b;
+        public static final int speed_value=0x7f050008;
         public static final int terrain=0x7f050003;
     }
     public static final class integer {
         public static final int location_interval_millis=0x7f080000;
-        public static final int runner_history_size=0x7f080003;
-        public static final int runner_interval_millis=0x7f080002;
-        public static final int view_interval_millis=0x7f080001;
+        public static final int runner_history_size=0x7f080004;
+        public static final int runner_interval_millis=0x7f080003;
+        public static final int speed_bar_max=0x7f080001;
+        public static final int view_interval_millis=0x7f080002;
     }
     public static final class layout {
         public static final int activity_monitor=0x7f030000;

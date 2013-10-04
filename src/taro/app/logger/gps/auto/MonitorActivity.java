@@ -31,6 +31,7 @@ import android.view.WindowManager;
 import android.widget.AnalogClock;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -76,6 +77,8 @@ public class MonitorActivity extends Activity {
 
     private TextView mSpeedView = null;
 
+    private ProgressBar mSpeedBar = null;
+
     private String mDateFormat;
 
 
@@ -110,6 +113,7 @@ public class MonitorActivity extends Activity {
         mClockTextView = (TextView) findViewById(R.id.clock_value);
         mDistanceTextView = (TextView) findViewById(R.id.distance_value);
         mSpeedView = (TextView) findViewById(R.id.speed_value);
+        mSpeedBar = (ProgressBar) findViewById(R.id.speed_bar);
 
         mDateFormat = getResources().getString(R.string.date_format);
 
@@ -207,11 +211,16 @@ public class MonitorActivity extends Activity {
                     if (null == mSpeedView) {
                         break;
                     }
+                    final double speed = 3.6 * location.getSpeed();
                     mSpeedFormat.setMaximumFractionDigits(1);
                     mSpeedFormat.setMinimumFractionDigits(1);
                     mSpeedFormat.setMinimumIntegerDigits(2);
-                    mSpeedView.setText(mSpeedFormat.format(3.6 * location.getSpeed()));  // [km/h]
+                    mSpeedView.setText(mSpeedFormat.format(speed));  // [km/h]
 
+                    if (null == mSpeedBar) {
+                        break;
+                    }
+                    mSpeedBar.setProgress((int)speed);
                 } while (false);
                 // TODO Auto-generated method stub
                 mHandler.postDelayed(this, mIntervalMillis);
