@@ -33,22 +33,11 @@ public class AutoGPSLogRunner implements Runnable {
 
     private final LocationHistory mHistory;
 
-    private final int mHistorySize;
-
-    private final Location[] mLocations;
-
     private final LogInfo mLogInfo;
 
     private final CurrentDateFileName mCurrentDateFileName;
 
     private Location mLocation = null;
-
-    private int mCounter = 0;
-
-    private boolean mIsLogging = false;
-
-    private static final String TAG = "AutoGPSLogRunner";
-
 
     public AutoGPSLogRunner(Context context,
             GPSListener listener,
@@ -60,9 +49,9 @@ public class AutoGPSLogRunner implements Runnable {
 
         Resources res = context.getResources();
         mIntervalMillis = res.getInteger(R.integer.runner_interval_millis);
-        mHistorySize = res.getInteger(R.integer.runner_history_size);
-        mHistory = new LocationHistory(context);
-        mLocations = new Location[mHistorySize];
+        res.getInteger(R.integer.runner_history_size);
+
+        mHistory = new LocationHistory(res.getInteger(R.integer.runner_history_size));
         mLogInfo = new LogInfo(mContext);
         mCurrentDateFileName = new CurrentDateFileName(
                 mLogInfo.getValuePrefix());
@@ -78,25 +67,10 @@ public class AutoGPSLogRunner implements Runnable {
     @Override
     public void run() {
 
-        do {
-            mLocation = mGPSListener.getLocation();
-//            if (null == mLocation) {
-//                break;
-//            }
-//
-//            if (!doesHistoryFilled()) {
-//                break;
-//            }
-//            if (mLocation.getTime() == getPrevious().getTime()) {
-//                // 更新時間になっても値が更新されていない場合はパス
-//                break;
-//            }
-//            logAutomatically();
-//            updateHistory();
-            mHistory.update(mLocation);
-            log();
+        mLocation = mGPSListener.getLocation();
+        mHistory.update(mLocation);
+        log();
 
-        } while (false);
         mHandler.postDelayed(this, mIntervalMillis);
     }
 
@@ -104,13 +78,16 @@ public class AutoGPSLogRunner implements Runnable {
     private void log() {
 
         if (mHistory.hasSpeed()) {
-            // 安定して速度が大きいときに記録する
-            Intent intent = new Intent(mContext, LogIntentService.class);
-            intent.putExtra(mLogInfo.getKeyFilename(),
-                    mCurrentDateFileName.getFileName());
-            intent.putExtra(mLogInfo.getKeyContents(), mHistory.toString());
-            intent.putExtra(mLogInfo.getKeyAppend(), true);
-            mContext.startService(intent);
+            String contents = mHistory.toString();
+            if (null != contents) {
+                // 安定して速度が大きいときに記録する
+                Intent intent = new Intent(mContext, LogIntentService.class);
+                intent.putExtra(mLogInfo.getKeyFilename(),
+                        mCurrentDateFileName.getFileName());
+                intent.putExtra(mLogInfo.getKeyContents(), mHistory.toString());
+                intent.putExtra(mLogInfo.getKeyAppend(), true);
+                mContext.startService(intent);
+            }
         }
     }
 
