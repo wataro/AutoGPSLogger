@@ -142,15 +142,16 @@ public class LocationHistory {
      */
     private boolean isStopping() {
 
+        int count = 0;
         for (Location loc: mHistory) {
             if (null == loc) {
                 return true;
             }
             if (1 < loc.getSpeed()) {
-                return false;
+                ++count;
             }
         }
-        return true;
+        return count < mHistory.length - count;
     }
 
     /**
