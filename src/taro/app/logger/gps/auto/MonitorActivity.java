@@ -13,6 +13,7 @@ import taro.service.AutoGPSLogService;
 import taro.service.AutoGPSLogService.AutoGPSLogBinder;
 import taro.service.LocationService;
 import taro.service.LocationService.LocationBinder;
+import taro.view.SpeedMeterView;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -77,7 +78,7 @@ public class MonitorActivity extends Activity {
 
     private TextView mSpeedView = null;
 
-    private ProgressBar mSpeedBar = null;
+    private SpeedMeterView mSpeedBar = null;
 
     private String mDateFormat;
 
@@ -113,7 +114,7 @@ public class MonitorActivity extends Activity {
         mClockTextView = (TextView) findViewById(R.id.clock_value);
         mDistanceTextView = (TextView) findViewById(R.id.distance_value);
         mSpeedView = (TextView) findViewById(R.id.speed_value);
-        mSpeedBar = (ProgressBar) findViewById(R.id.speed_bar);
+        mSpeedBar = (SpeedMeterView) findViewById(R.id.speedmeter);
 
         mDateFormat = getResources().getString(R.string.date_format);
 
@@ -220,7 +221,7 @@ public class MonitorActivity extends Activity {
                     if (null == mSpeedBar) {
                         break;
                     }
-                    mSpeedBar.setProgress((int)speed);
+                    mSpeedBar.setSpeed((int)speed);
                 } while (false);
                 // TODO Auto-generated method stub
                 mHandler.postDelayed(this, mIntervalMillis);

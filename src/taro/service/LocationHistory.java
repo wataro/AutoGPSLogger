@@ -32,9 +32,6 @@ public class LocationHistory {
     private final Location[] mHistory;
     private final int mHistorySize;
 
-    /** 現在の位置情報そのまま */
-    private Location mRawLocation = null;
-
     /**
      * 現在の位置情報を参照するための配列添字
      */
@@ -62,7 +59,7 @@ public class LocationHistory {
         if (null == location) {
             return;
         }
-        mRawLocation = new Location(location);
+        new Location(location);
         if (null == mHistory[mCurrentIndex]) {
             for (int i = 0; i < mHistory.length; ++i) {
                 mHistory[i] = new Location(location);
@@ -74,9 +71,7 @@ public class LocationHistory {
             return;
         }
         setSmoothedLocation(location);
-        if (!isStopping()) {
-            updateDistance();
-        }
+        updateDistance();
         Log.d(TAG, toString());
 
         updateIndex();
@@ -85,7 +80,10 @@ public class LocationHistory {
 
     private void updateDistance() {
 
-        mDistance += mHistory[mPreviousIndex].distanceTo(mHistory[mCurrentIndex]);
+        if (1 < mHistory[mCurrentIndex].getSpeed()) {
+            /* 1[m/s]より大きい速度のときだけ距離を更新する */
+            mDistance += mHistory[mPreviousIndex].distanceTo(mHistory[mCurrentIndex]);
+        }
     }
 
 
@@ -136,23 +134,6 @@ public class LocationHistory {
         return mHistory[mCurrentIndex];
     }
 
-
-    /**
-     * @return  真: 止まっている
-     */
-    private boolean isStopping() {
-
-        int count = 0;
-        for (Location loc: mHistory) {
-            if (null == loc) {
-                return true;
-            }
-            if (1 < loc.getSpeed()) {
-                ++count;
-            }
-        }
-        return count < mHistory.length - count;
-    }
 
     /**
      * 配列添字を更新する
